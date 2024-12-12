@@ -2,30 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Idea = require('../models/Idea');
 
-let ideas = [
-    {
-        id: 1,
-        text: "Honesty is the best policy",
-        tag: 'Politics',
-        username: 'Abraham Lincoln',
-        date: '1861-05-01'
-    },
-    {
-        id: 2,
-        content: "Hipocrisy is the safest policy",
-        tag: 'Politics',
-        username: 'Charles Princetown',
-        date: '1970-06-21'
-    },
-    {
-        id: 3,
-        content: "When you glaze into an abyss, the abyss also glazes at you",
-        tag: 'Thought Provoking',
-        username: 'Richard Riverside',
-        date: '2005-10-15'
-    }
-]; 
-
 // Get all ideas
 router.get('/', async (request,response) => {
     try{
@@ -36,8 +12,9 @@ router.get('/', async (request,response) => {
          });   
     }catch(error){
         response.status(500).json({ 
-            success: true,                         
-            error: 'Something went wrong'
+            success: false,                         
+            error: 'Something went wrong',
+            content: error
          }); 
     }             
 });                                                
@@ -83,7 +60,8 @@ router.post('/', async (request,response) =>{
     }catch(error){
         response.status(500).json({ 
             success: true,                         
-            error: 'Something went wrong'
+            error: 'Something went wrong',
+            content: error
          }); 
     }  
 });
